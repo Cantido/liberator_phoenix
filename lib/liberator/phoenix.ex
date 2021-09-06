@@ -30,8 +30,8 @@ defmodule Liberator.Phoenix do
       end
 
   The handlers will use the status code as the template name and the extension of the negotiated media type.
-  For example, the `Liberator.Resource.handle_not_found/1` handler with a negotiated media type of `text/plain` will render `404.txt`.
-  The `Liberator.Resource.handle_created/1` handler with a media type of `application/json` will render `201.json`.
+  For example, the `c:Liberator.Resource.handle_not_found/1` handler with a negotiated media type of `text/plain` will render `404.txt`.
+  The `c:Liberator.Resource.handle_created/1` handler with a media type of `application/json` will render `201.json`.
 
   The values set in `conn.assigns` will be given to the view as well.
   """

@@ -40,7 +40,8 @@ defmodule Liberator.Phoenix.MixProject do
     [
       {:liberator, "~> 2.0.0"},
       {:mime, "~> 2.0.0"},
-      {:phoenix_view, "~> 1.0"}
+      {:phoenix_view, "~> 1.0"},
+      {:ex_doc, "~> 0.25", only: :dev, runtime: :false}
     ]
   end
 end
