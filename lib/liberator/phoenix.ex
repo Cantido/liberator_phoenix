@@ -1,6 +1,37 @@
 defmodule Liberator.Phoenix do
   @moduledoc """
-  Documentation for `Liberator.Phoenix`.
+  Phoenix Framework integration for the Liberator library.
+
+  This module implements Liberator handlers that render Phoenix views.
+  It infers your view name by replacing `Resource` in your module name with `View`.
+  For example, `MyPhoenixResource` will use `MyPhoenixView` as its view module.
+
+      defmodule MyPhoenixResource do
+        use Liberator.Resource
+        use Liberator.Phoenix
+      end
+
+      defmodule MyPhoenixView do
+        use MyProject, :view
+      end
+
+  If you need to override it, set the `:view_module` option in your `use` statement.
+
+      defmodule MyPhoenixResource do
+        use Liberator.Resource
+        use Liberator.Phoenix, view_module: MyOtherView
+      end
+
+  You can also select only certain handlers to be overridden with the `:only` and `:except` options.
+
+      defmodule MyPhoenixResource do
+        use Liberator.Resource
+        use Liberator.Phoenix, only: [:handle_ok]
+      end
+
+  The handlers will use the status code as the template name and the extension of the negotiated media type.
+  For example, the `Liberator.Resource.handle_not_found/1` handler with a negotiated media type of `text/plain` will render `404.txt`.
+  The `Liberator.Resource.handle_created/1` handler with a media type of `application/json` will render `201.json`.
   """
 
   def view_name(module) do
