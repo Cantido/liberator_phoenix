@@ -11,8 +11,12 @@ defmodule Liberator.Phoenix do
     |> String.to_atom()
   end
 
-  def get_format(_conn) do
-    "text"
+  def get_format(conn) do
+    if is_nil(conn.assigns[:media_type]) do
+      "txt"
+    else
+      MIME.extensions(conn.assigns[:media_type]) |> Enum.at(0)
+    end
   end
 
   def render(conn, template, assigns) do

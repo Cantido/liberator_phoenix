@@ -29,6 +29,7 @@ defmodule Liberator.Phoenix.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       # {:liberator, git: "https://git.sr.ht/~cosmicrose/liberator"},
       {:liberator, path: "../liberator"},
+      {:mime, "~> 2.0.0"},
       {:phoenix_view, "~> 1.0"}
     ]
   end
