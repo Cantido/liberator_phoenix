@@ -44,21 +44,25 @@ end
 
 If you need to override it, set the `:view_module` option in your `use` statement.
 
+```elixir
 defmodule MyPhoenixResource do
   use Liberator.Resource
   use Liberator.Phoenix, view_module: MyOtherView
 end
+```
 
 You can also select only certain handlers to be overridden with the `:only` and `:except` options.
 
+```elixir
 defmodule MyPhoenixResource do
   use Liberator.Resource
   use Liberator.Phoenix, only: [:handle_ok]
 end
+```
 
 The handlers will use the status code as the template name and the extension of the negotiated media type.
-For example, the `c:Liberator.Resource.handle_not_found/1` handler with a negotiated media type of `text/plain` will render `404.txt`.
-The `c:Liberator.Resource.handle_created/1` handler with a media type of `application/json` will render `201.json`.
+For example, the `handle_not_found` handler with a negotiated media type of `text/plain` will render `404.txt`.
+The `handle_created` handler with a media type of `application/json` will render `201.json`.
 
 The values set in `conn.assigns` will be given to the view as well.
 
