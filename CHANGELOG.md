@@ -12,4 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Liberator.Phoenix` module with `Phoenix.View` integration.
 
 [Unreleased]: https://git.sr.ht/~cosmicrose/liberator_phoenix/log
-[1.0.0]: https://git.sr.ht/~cosmicrose/liberator_phoenix/refs/v0.1.0
+[0.1.0]: https://git.sr.ht/~cosmicrose/liberator_phoenix/refs/v0.1.0
