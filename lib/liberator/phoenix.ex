@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2021 Rosa Richter
+#
+# SPDX-License-Identifier: MIT
+
 defmodule Liberator.Phoenix do
   @moduledoc """
   Phoenix Framework integration for the Liberator library.

@@ -1,6 +1,12 @@
+# SPDX-FileCopyrightText: 2021 Rosa Richter
+#
+# SPDX-License-Identifier: MIT
+
 ARG MIX_ENV=dev
 
 all:
+  BUILD +lint
+  BUILD +lint-copyright
   BUILD +test
 
 get-deps:
@@ -11,9 +17,13 @@ get-deps:
 
   RUN mix deps.get
 
+  SAVE ARTIFACT deps AS LOCAL ./deps
+
 compile-deps:
   FROM +get-deps
   RUN MIX_ENV=$MIX_ENV mix deps.compile
+
+  SAVE ARTIFACT _build/$MIX_ENV AS LOCAL ./_build/$MIX_ENV
 
 build:
   FROM +compile-deps
@@ -21,6 +31,25 @@ build:
   COPY lib ./lib
 
   RUN MIX_ENV=$MIX_ENV mix compile
+
+  SAVE ARTIFACT _build/$MIX_ENV AS LOCAL ./_build/$MIX_ENV
+
+lint:
+  FROM +build
+
+  RUN MIX_ENV=$MIX_ENV mix credo list
+
+lint-copyright:
+  FROM fsfe/reuse
+
+  COPY . .
+
+  RUN reuse lint
+
+sast:
+  FROM +build
+
+  RUN MIX_ENV=$MIX_ENV mix sobelow --skip
 
 test:
   FROM --build-arg MIX_ENV=test +build
