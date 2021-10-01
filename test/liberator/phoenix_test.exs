@@ -21,7 +21,7 @@ defmodule Liberator.PhoenixTest do
 
     conn = HappyPathResource.call(conn, [])
 
-    assert conn.resp_body == "OK (rendered from template)\n\n"
+    assert conn.resp_body =~ "OK (rendered from template)"
   end
 
   defmodule ExceptResource do
@@ -38,7 +38,7 @@ defmodule Liberator.PhoenixTest do
 
     conn = ExceptResource.call(conn, [])
 
-    assert conn.resp_body == "OK"
+    assert conn.resp_body =~ "OK"
   end
 
   defmodule OnlyResource do
@@ -55,7 +55,7 @@ defmodule Liberator.PhoenixTest do
 
     conn = OnlyResource.call(conn, [])
 
-    assert conn.resp_body == "OK (rendered from template)\n\n"
+    assert conn.resp_body =~ "OK (rendered from template)"
   end
 
   defmodule OtherModuleResource do
@@ -72,6 +72,6 @@ defmodule Liberator.PhoenixTest do
 
     conn = OtherModuleResource.call(conn, [])
 
-    assert conn.resp_body == "OK (rendered from template)\n\n"
+    assert conn.resp_body =~ "OK (rendered from template)"
   end
 end
