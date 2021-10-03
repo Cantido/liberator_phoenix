@@ -42,6 +42,7 @@ defmodule Liberator.Phoenix.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:liberator, "~> 2.0.0"},
       {:mime, "~> 2.0.0"},
       {:nimble_options, "~> 0.3.0"},

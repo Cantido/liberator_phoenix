@@ -98,6 +98,7 @@ defmodule Liberator.Phoenix do
   end
 
   defmacro __using__(opts) do
+    # credo:disable-for-next-line Credo.Check.Refactor.LongQuoteBlocks
     quote bind_quoted: [opts: opts] do
       opts = NimbleOptions.validate!(opts, Liberator.Phoenix.options_schema(__MODULE__))
 
