@@ -99,148 +99,157 @@ defmodule Liberator.Phoenix do
 
   defmacro __using__(opts) do
     quote bind_quoted: [opts: opts] do
-      import Liberator.Phoenix, only: [render: 3, handler_enabled?: 2]
-
       opts = NimbleOptions.validate!(opts, Liberator.Phoenix.options_schema(__MODULE__))
 
-      if handler_enabled?(:handle_ok, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_ok, opts) do
         @impl Liberator.Resource
-        def handle_ok(conn), do: render(conn, "200", unquote(opts))
+        def handle_ok(conn), do: Liberator.Phoenix.render(conn, "200", unquote(opts))
       end
 
-      if handler_enabled?(:handle_options, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_options, opts) do
         @impl Liberator.Resource
-        def handle_options(conn), do: render(conn, "200-options", unquote(opts))
+        def handle_options(conn), do: Liberator.Phoenix.render(conn, "200-options", unquote(opts))
       end
 
-      if handler_enabled?(:handle_created, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_created, opts) do
         @impl Liberator.Resource
-        def handle_created(conn), do: render(conn, "201", unquote(opts))
+        def handle_created(conn), do: Liberator.Phoenix.render(conn, "201", unquote(opts))
       end
 
-      if handler_enabled?(:handle_accepted, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_accepted, opts) do
         @impl Liberator.Resource
-        def handle_accepted(conn), do: render(conn, "202", unquote(opts))
+        def handle_accepted(conn), do: Liberator.Phoenix.render(conn, "202", unquote(opts))
       end
 
-      if handler_enabled?(:handle_no_content, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_no_content, opts) do
         @impl Liberator.Resource
-        def handle_no_content(conn), do: render(conn, "204", unquote(opts))
+        def handle_no_content(conn), do: Liberator.Phoenix.render(conn, "204", unquote(opts))
       end
 
-      if handler_enabled?(:handle_multiple_representations, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_multiple_representations, opts) do
         @impl Liberator.Resource
-        def handle_multiple_representations(conn), do: render(conn, "300", unquote(opts))
+        def handle_multiple_representations(conn),
+          do: Liberator.Phoenix.render(conn, "300", unquote(opts))
       end
 
-      if handler_enabled?(:handle_moved_permanently, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_moved_permanently, opts) do
         @impl Liberator.Resource
-        def handle_moved_permanently(conn), do: render(conn, "301", unquote(opts))
+        def handle_moved_permanently(conn),
+          do: Liberator.Phoenix.render(conn, "301", unquote(opts))
       end
 
-      if handler_enabled?(:handle_see_other, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_see_other, opts) do
         @impl Liberator.Resource
-        def handle_see_other(conn), do: render(conn, "303", unquote(opts))
+        def handle_see_other(conn), do: Liberator.Phoenix.render(conn, "303", unquote(opts))
       end
 
-      if handler_enabled?(:handle_not_modified, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_not_modified, opts) do
         @impl Liberator.Resource
-        def handle_not_modified(conn), do: render(conn, "304", unquote(opts))
+        def handle_not_modified(conn), do: Liberator.Phoenix.render(conn, "304", unquote(opts))
       end
 
-      if handler_enabled?(:handle_malformed, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_malformed, opts) do
         @impl Liberator.Resource
-        def handle_malformed(conn), do: render(conn, "400", unquote(opts))
+        def handle_malformed(conn), do: Liberator.Phoenix.render(conn, "400", unquote(opts))
       end
 
-      if handler_enabled?(:handle_payment_required, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_payment_required, opts) do
         @impl Liberator.Resource
-        def handle_payment_required(conn), do: render(conn, "402", unquote(opts))
+        def handle_payment_required(conn),
+          do: Liberator.Phoenix.render(conn, "402", unquote(opts))
       end
 
-      if handler_enabled?(:handle_unauthorized, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_unauthorized, opts) do
         @impl Liberator.Resource
-        def handle_unauthorized(conn), do: render(conn, "401", unquote(opts))
+        def handle_unauthorized(conn), do: Liberator.Phoenix.render(conn, "401", unquote(opts))
       end
 
-      if handler_enabled?(:handle_forbidden, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_forbidden, opts) do
         @impl Liberator.Resource
-        def handle_forbidden(conn), do: render(conn, "403", unquote(opts))
+        def handle_forbidden(conn), do: Liberator.Phoenix.render(conn, "403", unquote(opts))
       end
 
-      if handler_enabled?(:handle_not_found, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_not_found, opts) do
         @impl Liberator.Resource
-        def handle_not_found(conn), do: render(conn, "404", unquote(opts))
+        def handle_not_found(conn), do: Liberator.Phoenix.render(conn, "404", unquote(opts))
       end
 
-      if handler_enabled?(:handle_method_not_allowed, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_method_not_allowed, opts) do
         @impl Liberator.Resource
-        def handle_method_not_allowed(conn), do: render(conn, "405", unquote(opts))
+        def handle_method_not_allowed(conn),
+          do: Liberator.Phoenix.render(conn, "405", unquote(opts))
       end
 
-      if handler_enabled?(:handle_not_acceptable, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_not_acceptable, opts) do
         @impl Liberator.Resource
-        def handle_not_acceptable(conn), do: render(conn, "406", unquote(opts))
+        def handle_not_acceptable(conn), do: Liberator.Phoenix.render(conn, "406", unquote(opts))
       end
 
-      if handler_enabled?(:handle_conflict, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_conflict, opts) do
         @impl Liberator.Resource
-        def handle_conflict(conn), do: render(conn, "409", unquote(opts))
+        def handle_conflict(conn), do: Liberator.Phoenix.render(conn, "409", unquote(opts))
       end
 
-      if handler_enabled?(:handle_gone, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_gone, opts) do
         @impl Liberator.Resource
-        def handle_gone(conn), do: render(conn, "410", unquote(opts))
+        def handle_gone(conn), do: Liberator.Phoenix.render(conn, "410", unquote(opts))
       end
 
-      if handler_enabled?(:handle_precondition_failed, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_precondition_failed, opts) do
         @impl Liberator.Resource
-        def handle_precondition_failed(conn), do: render(conn, "412", unquote(opts))
+        def handle_precondition_failed(conn),
+          do: Liberator.Phoenix.render(conn, "412", unquote(opts))
       end
 
-      if handler_enabled?(:handle_request_entity_too_large, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_request_entity_too_large, opts) do
         @impl Liberator.Resource
-        def handle_request_entity_too_large(conn), do: render(conn, "413", unquote(opts))
+        def handle_request_entity_too_large(conn),
+          do: Liberator.Phoenix.render(conn, "413", unquote(opts))
       end
 
-      if handler_enabled?(:handle_uri_too_long, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_uri_too_long, opts) do
         @impl Liberator.Resource
-        def handle_uri_too_long(conn), do: render(conn, "414", unquote(opts))
+        def handle_uri_too_long(conn), do: Liberator.Phoenix.render(conn, "414", unquote(opts))
       end
 
-      if handler_enabled?(:handle_unsupported_media_type, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_unsupported_media_type, opts) do
         @impl Liberator.Resource
-        def handle_unsupported_media_type(conn), do: render(conn, "415", unquote(opts))
+        def handle_unsupported_media_type(conn),
+          do: Liberator.Phoenix.render(conn, "415", unquote(opts))
       end
 
-      if handler_enabled?(:handle_too_many_requests, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_too_many_requests, opts) do
         @impl Liberator.Resource
-        def handle_too_many_requests(conn), do: render(conn, "429", unquote(opts))
+        def handle_too_many_requests(conn),
+          do: Liberator.Phoenix.render(conn, "429", unquote(opts))
       end
 
-      if handler_enabled?(:handle_unavailable_for_legal_reasons, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_unavailable_for_legal_reasons, opts) do
         @impl Liberator.Resource
-        def handle_unavailable_for_legal_reasons(conn), do: render(conn, "451", unquote(opts))
+        def handle_unavailable_for_legal_reasons(conn),
+          do: Liberator.Phoenix.render(conn, "451", unquote(opts))
       end
 
-      if handler_enabled?(:handle_error, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_error, opts) do
         @impl Liberator.Resource
-        def handle_error(conn, _error, _failed_step), do: render(conn, "500", unquote(opts))
+        def handle_error(conn, _error, _failed_step),
+          do: Liberator.Phoenix.render(conn, "500", unquote(opts))
       end
 
-      if handler_enabled?(:handle_not_implemented, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_not_implemented, opts) do
         @impl Liberator.Resource
-        def handle_not_implemented(conn), do: render(conn, "501", unquote(opts))
+        def handle_not_implemented(conn), do: Liberator.Phoenix.render(conn, "501", unquote(opts))
       end
 
-      if handler_enabled?(:handle_unknown_method, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_unknown_method, opts) do
         @impl Liberator.Resource
-        def handle_unknown_method(conn), do: render(conn, "501", unquote(opts))
+        def handle_unknown_method(conn), do: Liberator.Phoenix.render(conn, "501", unquote(opts))
       end
 
-      if handler_enabled?(:handle_service_unavailable, opts) do
+      if Liberator.Phoenix.handler_enabled?(:handle_service_unavailable, opts) do
         @impl Liberator.Resource
-        def handle_service_unavailable(conn), do: render(conn, "503", unquote(opts))
+        def handle_service_unavailable(conn),
+          do: Liberator.Phoenix.render(conn, "503", unquote(opts))
       end
     end
   end
