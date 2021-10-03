@@ -40,6 +40,26 @@ defmodule Liberator.Phoenix do
   The values set in `conn.assigns` will be given to the view as well.
   """
 
+  def options_schema(module) do
+    NimbleOptions.new!(
+      only: [
+        type: {:list, :atom},
+        default: [],
+        doc: "A list of handler functions that should render views."
+      ],
+      except: [
+        type: {:list, :atom},
+        default: [],
+        doc: "A list of handler functions that should not render views."
+      ],
+      view_module: [
+        type: :atom,
+        default: view_name(module),
+        doc: "The view module that should render views for this module."
+      ]
+    )
+  end
+
   def view_name(module) do
     module
     |> Atom.to_string()
@@ -80,6 +100,8 @@ defmodule Liberator.Phoenix do
   defmacro __using__(opts) do
     quote bind_quoted: [opts: opts] do
       import Liberator.Phoenix, only: [render: 3, handler_enabled?: 2]
+
+      opts = NimbleOptions.validate!(opts, Liberator.Phoenix.options_schema(__MODULE__))
 
       if handler_enabled?(:handle_ok, opts) do
         @impl Liberator.Resource
